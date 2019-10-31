@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>QWC Demo</title>
+    <script src="./dist/index.umd.js"></script>
+    <link rel="stylesheet" href="https://fonts.pycode.tk/open-sans.css" />
+    <style>
+      body {
+        --primary-color: #4749e4;
+        --translate-normal-pos: translate(1%, 150%);
+        --translate-up: translate(1%, 1%);
+        --text-color: #000;
+        --border-shadow-color: #e3e3e3;
+        --header-text-color: #fff;
+        --background-color: #fff;
+        --button-color: var(--primary-color);
+        --raised-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2),
+          0px 8px 10px 1px rgba(0, 0, 0, 0.14),
+          0px 3px 14px 2px rgba(0, 0, 0, 0.12);
+        background-color: var(--background-color);
+        color: var(--text-color);
+        transition: 0.3s ease-in-out;
+        font-family: "Open Sans", sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      main {
+        margin-left: auto;
+        margin-right: auto;
+        /* text-align: center; */
+      }
+    </style>
+  </head>
+
+  <body>
+    <template is="custom" custom-element="animated-link">
+      <style>
+        a.styled {
+          border: none;
+          background-color: #403d3d;
+          color: #fff;
+          box-shadow: var(--raised-shadow);
+          padding: 10px;
+          border-radius: 15px;
+          padding-left: 40px;
+          padding-right: 40px;
+          text-transform: uppercase;
+          font-weight: 700;
+          outline: 0;
+        }
+        div.styled {
+          padding: 10px;
+          margin: auto;
+          margin-top: 10px;
+          margin-bottom: 10px;
+          text-align: center;
+        }
+        div.unstyled {
+          display: inline;
+        }
+      </style>
+      <div class="styled">
+        <a class="styled" data-href="href" data-onclick="animate"
+          ><slot></slot
+        ></a>
+      </div>
+    </template>
+    <template is="custom" custom-element="app-header">
+      <style>
+        header {
+          top: 0;
+          z-index: 20;
+          left: 0;
+          right: 0;
+          margin-left: auto;
+          margin-right: auto;
+          padding: 8px;
+          overflow: hidden;
+          background: var(--primary-color);
+          text-align: center;
+          color: var(--header-text-color);
+          text-align: center;
+        }
+        span {
+          font-weight: bold;
+        }
+      </style>
+      <header><span>QWC - WebComponents Lib</span></header>
+    </template>
+    <template is="custom" custom-element="animate-text">
+      <style>
+        :host {
+          top: 0;
+          position: fixed;
+          height: 100%;
+          width: 100%;
+          color: #fff;
+          animation: reveal_banner 0.55s ease-in-out;
+          background-color: var(--primary-color);
+          z-index: 100;
+          margin: auto;
+          text-align: center;
+          font-weight: bold;
+        }
+        @keyframes reveal_banner {
+          from {
+            transform: scaleY(0.01);
+          }
+          to {
+            transform: scaleY(1);
+          }
+        }
+        ::slotted(div) {
+          margin-top: 100px;
+        }
+      </style>
+      <slot></slot>
+    </template>
+    <template is="custom" custom-element="app-demos">
+      <style>
+        .d-title {
+          font-size: 1.5rem;
+        }
+      </style>
+      <animated-link href="https://github.com/Hydrophobefireman/qwc">
+        Github
+      </animated-link>
+      <div>
+        <div class="d-title">Demos:</div>
+        <slot></slot>
+      </div>
+    </template>
+    <template is="custom" custom-element="slotted-demo">
+      <style>
+        ::slotted(div) {
+          color: blue;
+        }
+        .demo-box {
+          margin: auto;
+          text-align: center;
+          border: 2px solid #e3e3e3;
+          width: 80%;
+          border-radius: 10px;
+          box-shadow: var(--raised-shadow);
+          margin-top: 10px;
+          margin-bottom: 10px;
+        }
+      </style>
+      <div class="demo-box">
+        <div>&lt;slots&gt;</div>
+        <div>Slotted Content Appears below</div>
+        <slot></slot>
+      </div>
+    </template>
+    <template is="custom" custom-element="app-description">
+      <style>
+        :host {
+          padding: 30px;
+          display: block;
+          text-align: center;
+          background: linear-gradient(
+              315deg,
+              rgba(255, 255, 255, 0.5) 0%,
+              rgba(255, 0, 0, 0) 100%
+            ),
+            linear-gradient(315deg, #2a96f1 0%, #4ffff2 100%);
+        }
+        .x {
+          margin: auto;
+          text-align: center;
+          font-size: 5rem;
+          font-family: sans-serif;
+          color: #282c34;
+        }
+        .tx {
+          font-weight: bold;
+          font-size: 1.2rem;
+        }
+      </style>
+      <div class="x">QWC</div>
+      <div class="tx">
+        Write 0 javascript classes and create reusable custom elements
+      </div>
+    </template>
+    <template is="custom" custom-element="button-counter-demo"
+      ><style>
+        .demo-box {
+          margin: auto;
+          text-align: center;
+          border: 2px solid #e3e3e3;
+          width: 80%;
+          border-radius: 10px;
+          box-shadow: var(--raised-shadow);
+          margin-top: 10px;
+          margin-bottom: 10px;
+        }
+      </style>
+      <div class="demo-box">
+        General event listeners and basic reactivity
+        <div data-text-content="currentDate"></div>
+        <button
+          updates-reactively
+          data-text-content="val"
+          data-onclick="handleClick"
+        ></button>
+      </div>
+    </template>
+
+    <app-header></app-header>
+    <main>
+      <app-description></app-description>
+      <app-demos>
+        <slotted-demo><div>Slotted Text</div></slotted-demo>
+        <paper-input-demo></paper-input-demo>
+        <button-counter-demo></button-counter-demo>
+      </app-demos>
+      <div>
+        Check out this same example using<animated-link
+          unstyled
+          href="/html-import.html"
+        >
+          qwc.htmlImport</animated-link
+        >
+      </div>
+    </main>
+    <script>
+      const config = {
+        "animated-link": {
+          href: null,
+          animate(e) {
+            e.preventDefault();
+            const el = document.createElement("animate-text");
+            const div = document.createElement("div");
+            const url = this.customElement.config.href;
+            div.textContent = "Loading " + url;
+            el.appendChild(div);
+            document.body.appendChild(el);
+            setTimeout(() => (location = url), 500);
+          }
+        },
+        "button-counter-demo": {
+          count: 0,
+          val: "Not Clicked Yet",
+          handleClick() {
+            const cfg = this.customElement.config;
+            const c = ++cfg.count;
+            cfg.val = "Clicked " + c + " time" + (c === 1 ? "" : "s");
+          },
+          currentDate: new Date().toString()
+        }
+      };
+      const mods = {
+        "button-counter-demo": {
+          modifyPrototype(p) {
+            Object.defineProperties(p, {
+              connectedCallback: {
+                value() {
+                  this.__interval = setInterval(() => {
+                    this.config.currentDate = new Date().toString();
+                    this.update();
+                  }, 1000);
+                }
+              },
+              disconnectedCallback: {
+                value() {
+                  clearInterval(this.__interval);
+                }
+              }
+            });
+          }
+        },
+        "animated-link": {
+          observedAttributes: [
+            {
+              prop: "unstyled",
+              type: "bool",
+              listener(o, n) {
+                const a = this.shadowRoot.querySelector("a");
+                const div = this.shadowRoot.querySelector("div");
+                if (n !== null) {
+                  a.className = div.className = "unstyled";
+                } else {
+                  a.className = div.className = "styled";
+                }
+              }
+            },
+            {
+              prop: "href",
+              listener(ov, nv) {
+                this.config.href = nv;
+                this.update();
+              }
+            }
+          ]
+        }
+      };
+
+      qwc.init(mods, config);
+    </script>
+  </body>
+</html>
