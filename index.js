@@ -19,13 +19,12 @@ export const init = (protoData, props, templateArray) => {
     );
   }
 };
-export const htmlImport = async function(pd, props, url) {
+export const HTMLImport = async function(pd, props, url) {
   const data = await fetch(url);
   const text = await data.text();
   const tpl = document.createElement("template");
   tpl.innerHTML = text;
   const node = tpl.content.cloneNode(!0);
-  console.log(node);
   const nodeArr = arrFrom(node.querySelectorAll(REQUIRED_SELECTOR));
   return init(pd, props, nodeArr);
 };
