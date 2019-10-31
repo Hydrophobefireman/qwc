@@ -36,12 +36,20 @@ QWC is the simplest way to create a new webcomponent, no need to write classes, 
      "my-custom-element": {
        modifyConstructor(constructor) {
          // modify class constructor
-         Object.defineProperty(constructor, "observedAttributes", {
-           get() {
-             return ["src"];
+         Object.defineProperty(constructor, "connectedCallback", {
+           value() {
+             //callback code
            }
          });
        },
+       observedAttributes: [
+         {
+           prop: "src",
+           listener(oldVal, newVal) {
+             //handle change
+           }
+         }
+       ],
        modifyPrototype(prototype) {
          Object.defineProperty(prototype, "attributeChangedCallback", {
            value() {
