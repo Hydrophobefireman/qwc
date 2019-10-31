@@ -208,7 +208,23 @@
         ></button>
       </div>
     </template>
-
+    <template is="custom" custom-element="app-disclaimer">
+      <style>
+        div {
+          width: 80%;
+          text-align: center;
+          margin: auto;
+          font-size: 0.85rem;
+        }
+      </style>
+      <div>
+        Note: Don't actually use this for massive components. This is NOT a
+        framework, this is just something I made (for myself, initially) for
+        small, reusable elements like a
+        <span data-text-content="spinner"></span> or a
+        <span data-text-content="video-player"></span>.
+      </div>
+    </template>
     <app-header></app-header>
     <main>
       <app-description></app-description>
@@ -225,6 +241,7 @@
           qwc.HTMLImport</animated-link
         >
       </div>
+      <app-disclaimer></app-disclaimer>
     </main>
     <script>
       const config = {
@@ -250,6 +267,10 @@
             cfg.val = "Clicked " + c + " time" + (c === 1 ? "" : "s");
           },
           currentDate: new Date().toString()
+        },
+        "app-disclaimer": {
+          spinner: "<loading-spinner/>",
+          "video-player": "<video-player/>"
         }
       };
       const mods = {
