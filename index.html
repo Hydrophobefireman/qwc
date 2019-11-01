@@ -5,37 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>QWC Demo</title>
-    <script src="./dist/index.umd.js"></script>
     <link rel="stylesheet" href="https://fonts.pycode.tk/open-sans.css" />
-    <style>
-      body {
-        --primary-color: #4749e4;
-        --translate-normal-pos: translate(1%, 150%);
-        --translate-up: translate(1%, 1%);
-        --text-color: #000;
-        --border-shadow-color: #e3e3e3;
-        --header-text-color: #fff;
-        --background-color: #fff;
-        --button-color: var(--primary-color);
-        --raised-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2),
-          0px 8px 10px 1px rgba(0, 0, 0, 0.14),
-          0px 3px 14px 2px rgba(0, 0, 0, 0.12);
-        background-color: var(--background-color);
-        color: var(--text-color);
-        transition: 0.3s ease-in-out;
-        font-family: "Open Sans", sans-serif;
-        margin: 0;
-        padding: 0;
-      }
-      main {
-        margin-left: auto;
-        margin-right: auto;
-        /* text-align: center; */
-      }
-    </style>
+    <link rel="stylesheet" href="./serve/app.css" />
   </head>
-
   <body>
+    <!-- Custom Elements Start -->
     <template is="custom" custom-element="animated-link">
       <style>
         a.styled {
@@ -144,6 +118,7 @@
           border: 2px solid #e3e3e3;
           width: 80%;
           border-radius: 10px;
+          padding: 20px;
           box-shadow: var(--raised-shadow);
           margin-top: 10px;
           margin-bottom: 10px;
@@ -193,6 +168,7 @@
           border: 2px solid #e3e3e3;
           width: 80%;
           border-radius: 10px;
+          padding: 20px;
           box-shadow: var(--raised-shadow);
           margin-top: 10px;
           margin-bottom: 10px;
@@ -216,15 +192,19 @@
           margin: auto;
           font-size: 0.85rem;
         }
+        span {
+          color: red;
+        }
       </style>
       <div>
         Note: Don't actually use this for massive components. This is NOT a
         framework, this is just something I made (for myself, initially) for
         small, reusable elements like a
         <span data-text-content="spinner"></span> or a
-        <span data-text-content="video-player"></span>.
+        <span data-text-content="video"></span>.
       </div>
     </template>
+    <!-- Custom Elements End -->
     <app-header></app-header>
     <main>
       <app-description></app-description>
@@ -243,83 +223,10 @@
       </div>
       <app-disclaimer></app-disclaimer>
     </main>
-    <script>
-      const config = {
-        "animated-link": {
-          href: null,
-          animate(e) {
-            e.preventDefault();
-            const el = document.createElement("animate-text");
-            const div = document.createElement("div");
-            const url = this.customElement.config.href;
-            div.textContent = "Loading " + url;
-            el.appendChild(div);
-            document.body.appendChild(el);
-            setTimeout(() => (location = url), 500);
-          }
-        },
-        "button-counter-demo": {
-          count: 0,
-          val: "Not Clicked Yet",
-          handleClick() {
-            const cfg = this.customElement.config;
-            const c = ++cfg.count;
-            cfg.val = "Clicked " + c + " time" + (c === 1 ? "" : "s");
-          },
-          currentDate: new Date().toString()
-        },
-        "app-disclaimer": {
-          spinner: "<loading-spinner/>",
-          "video-player": "<video-player/>"
-        }
-      };
-      const mods = {
-        "button-counter-demo": {
-          modifyPrototype(p) {
-            Object.defineProperties(p, {
-              connectedCallback: {
-                value() {
-                  this.__interval = setInterval(() => {
-                    this.config.currentDate = new Date().toString();
-                    this.update();
-                  }, 1000);
-                }
-              },
-              disconnectedCallback: {
-                value() {
-                  clearInterval(this.__interval);
-                }
-              }
-            });
-          }
-        },
-        "animated-link": {
-          observedAttributes: [
-            {
-              prop: "unstyled",
-              type: "bool",
-              listener(o, n) {
-                const a = this.shadowRoot.querySelector("a");
-                const div = this.shadowRoot.querySelector("div");
-                if (n !== null) {
-                  a.className = div.className = "unstyled";
-                } else {
-                  a.className = div.className = "styled";
-                }
-              }
-            },
-            {
-              prop: "href",
-              listener(ov, nv) {
-                this.config.href = nv;
-                this.update();
-              }
-            }
-          ]
-        }
-      };
-
-      qwc.init(mods, config);
+    <script src="./serve/app.js"></script>
+    <script type="module">
+      import { init } from "./dist/index.modern.js";
+      init(mods, config);
     </script>
   </body>
 </html>

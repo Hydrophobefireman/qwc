@@ -5,34 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>QWC Demo</title>
-    <script src="./dist/index.umd.js"></script>
     <link rel="stylesheet" href="https://fonts.pycode.tk/open-sans.css" />
-    <style>
-      body {
-        --primary-color: #4749e4;
-        --translate-normal-pos: translate(1%, 150%);
-        --translate-up: translate(1%, 1%);
-        --text-color: #000;
-        --border-shadow-color: #e3e3e3;
-        --header-text-color: #fff;
-        --background-color: #fff;
-        --button-color: var(--primary-color);
-        --raised-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2),
-          0px 8px 10px 1px rgba(0, 0, 0, 0.14),
-          0px 3px 14px 2px rgba(0, 0, 0, 0.12);
-        background-color: var(--background-color);
-        color: var(--text-color);
-        transition: 0.3s ease-in-out;
-        font-family: "Open Sans", sans-serif;
-        margin: 0;
-        padding: 0;
-      }
-      main {
-        margin-left: auto;
-        margin-right: auto;
-        /* text-align: center; */
-      }
-    </style>
+    <link rel="stylesheet" href="./serve/app.css" />
   </head>
 
   <body>
@@ -49,12 +23,13 @@
         the html.
       </div>
     </main>
-    <script src="./app.js"></script>
-    <script>
-      qwc.HTMLImport(
+    <script src="./serve/app.js"></script>
+    <script type="module">
+      import { HTMLImport } from "./dist/index.modern.js";
+      HTMLImport(
         mods,
         config,
-        new URL("./import.html", location.href).toString()
+        new URL("./serve/import.html", location.href).toString()
       );
     </script>
   </body>

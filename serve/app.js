@@ -1,4 +1,5 @@
 const config = {
+  "app-disclaimer": { spinner: "<loading-spinner/>", video: "<video-player/>" },
   "animated-link": {
     href: null,
     animate(e) {
@@ -41,6 +42,13 @@ const mods = {
           }
         }
       });
+    }
+  },
+  "animate-text": {
+    modifyPrototype(p) {
+      p.reanimate = function() {
+        document.body.appendChild(this);
+      };
     }
   },
   "animated-link": {
