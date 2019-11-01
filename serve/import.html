@@ -170,3 +170,35 @@
     ></button>
   </div>
 </template>
+
+<template is="custom" custom-element="paper-input-demo">
+  <style>
+    .demo-box {
+      margin: auto;
+      text-align: center;
+      border: 2px solid #e3e3e3;
+      width: 80%;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: var(--raised-shadow);
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    input:focus {
+      border-bottom: 2px solid var(--primary-color);
+    }
+    input {
+      transition: 0.3s ease-in-out;
+      padding: 8px;
+      width: 80%;
+      border: none;
+      outline: none;
+      border-bottom: 2px solid #846d6d;
+    }
+  </style>
+  <div class="demo-box">
+    <div>Styled Input</div>
+    <div>Value:<span data-text-content="value"></span></div>
+    <input data-oninput="handleInput" updates-reactively />
+  </div>
+</template>

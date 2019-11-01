@@ -1,4 +1,12 @@
 const config = {
+  "paper-input-demo": {
+    value: "",
+    handleInput() {
+      const val = this.value;
+      this.customElement.config.value = val;
+      this.customElement.value = val;
+    }
+  },
   "app-disclaimer": { spinner: "<loading-spinner/>", video: "<video-player/>" },
   "animated-link": {
     href: null,
@@ -43,6 +51,9 @@ const mods = {
         }
       });
     }
+  },
+  "paper-input-demo": {
+    observedAttributes: [{ prop: "value", listener() {} }]
   },
   "animate-text": {
     modifyPrototype(p) {
