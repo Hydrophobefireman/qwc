@@ -1,6 +1,6 @@
 {
   "name": "@hydrophobefireman/qwc",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "quick and easy webcomponents without needing to write any javascript classes yourself",
   "main": "dist/index.js",
   "scripts": {

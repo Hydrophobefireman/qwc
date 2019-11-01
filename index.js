@@ -24,7 +24,7 @@ export const HTMLImport = async function(pd, props, url) {
   const text = await data.text();
   const tpl = document.createElement("template");
   tpl.innerHTML = text;
-  const node = tpl.content.cloneNode(!0);
+  const node = tpl.content;
   const nodeArr = arrFrom(node.querySelectorAll(REQUIRED_SELECTOR));
   return init(pd, props, nodeArr);
 };
