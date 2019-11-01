@@ -1,8 +1,9 @@
 const config = {
   "paper-input-demo": {
     value: "",
+    placeholder: "",
     handleInput() {
-      const val = this.value;
+      const val = this.value || "";
       this.customElement.config.value = val;
       this.customElement.value = val;
     }
@@ -53,7 +54,16 @@ const mods = {
     }
   },
   "paper-input-demo": {
-    observedAttributes: [{ prop: "value", listener() {} }]
+    observedAttributes: [
+      { prop: "value", listener() {} },
+      {
+        prop: "placeholder",
+        listener(old, newV) {
+          this.config.placeholder = newV;
+          this.shadowRoot.querySelector("input").placeholder = newV || "";
+        }
+      }
+    ]
   },
   "animate-text": {
     modifyPrototype(p) {

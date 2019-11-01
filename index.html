@@ -232,7 +232,11 @@
       <div class="demo-box">
         <div>Styled Input</div>
         <div>Value:<span data-text-content="value"></span></div>
-        <input data-oninput="handleInput" updates-reactively />
+        <input
+          data-oninput="handleInput"
+          data-placeholder="placeholder"
+          updates-reactively
+        />
       </div>
     </template>
     <!-- Custom Elements End -->
@@ -241,7 +245,7 @@
       <app-description></app-description>
       <app-demos>
         <slotted-demo><div>Slotted Text</div></slotted-demo>
-        <paper-input-demo></paper-input-demo>
+        <paper-input-demo placeholder="Type Something"></paper-input-demo>
         <button-counter-demo></button-counter-demo>
       </app-demos>
       <div>
