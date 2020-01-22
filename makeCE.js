@@ -33,7 +33,8 @@ const gl = getGlobal();
 function setupAttrChangedCallBack(proto) {
   Object.defineProperty(proto, "attributeChangedCallback", {
     value(prop, oldVal, newVal) {
-      return this.__attrListeners[prop].call(this, oldVal, newVal);
+      const fn = this.__attrListeners[prop]
+	return fn && fn.call(this, oldVal, newVal);
     }
   });
 }
